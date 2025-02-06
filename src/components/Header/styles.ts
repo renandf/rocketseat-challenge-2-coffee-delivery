@@ -9,31 +9,22 @@ export const HeaderContainer = styled.header`
     width: 40px;
   }
 
-  /* nav {
+  nav {
     display: flex;
     gap: .5rem;
   }
+`
 
-  a {
-    width: 3rem;
-    height: 3rem;
+export const Location = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    color: ${props => props.theme['gray-300']};
-
-    border-block: 3px solid transparent;
-    transition: color .2s, border .2s;
-
-    &:hover {
-      border-block-end: 3px solid ${props => props.theme['green-500']};
-      color: ${props => props.theme['gray-100']};
-    }
-
-    &.active {
-      color: ${props => props.theme['green-500']};
-    } */
-  }
+  padding: .5rem;
+  line-height: 0;
+  font-size: .875rem;
+  
+  background: ${props => props.theme['purple-light']};
+  border-radius: ${props => props.theme['border-radius-md']};
+  color: ${props => props.theme['purple-dark']}
 `
