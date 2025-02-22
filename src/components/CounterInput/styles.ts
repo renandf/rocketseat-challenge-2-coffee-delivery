@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const FormContainer = styled.form`
+export const CounterContainer = styled.div`
   padding: 2px 8px;
   display: flex;
   align-items: center;
@@ -36,4 +36,10 @@ export const ButtonContainer = styled.button`
   border: 0;
   background-color: transparent;
   color: ${props => props.theme['purple']};
+  cursor: pointer;
+
+  &:disabled {
+    opacity: .2;
+    cursor: not-allowed;
+  }
 `
