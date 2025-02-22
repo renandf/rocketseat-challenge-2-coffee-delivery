@@ -1,5 +1,5 @@
 import { CoffeeCard } from '../../components/CoffeeCard'
-import { coffees } from './coffees.ts'
+import { coffees } from '../../content/coffees.ts'
 import { Hero } from './Hero'
 import { CoffeesContainer } from './styles.ts'
 
@@ -9,7 +9,7 @@ export function Home() {
       <Hero />
 
       <h2>Nossos cafés</h2>
-      
+
       <CoffeesContainer>
         {coffees.map(coffee => {
           return (
