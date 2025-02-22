@@ -19,5 +19,6 @@ export const defaultTheme ={
   'purple': '#8047F8',
   'purple-dark': '#4B2995',
 
-  'border-radius-md': '6px'
+  'border-radius-md': '6px',
+  'border-radius-lg': '36px'
 }
