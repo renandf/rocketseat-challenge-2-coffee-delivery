@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const CounterContainer = styled.div`
-  padding: 2px 8px;
+  /* padding: 0 .5rem; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -12,7 +12,7 @@ export const CounterContainer = styled.div`
 
 export const InputContainer = styled.input`
   border: 0;
-  width: 2rem;
+  width: 1.5rem;
   height: 2rem;
   text-align: center;
   background-color: transparent;
@@ -37,9 +37,33 @@ export const ButtonContainer = styled.button`
   background-color: transparent;
   color: ${props => props.theme['purple']};
   cursor: pointer;
-
+  transition: background-color .2s;
+  
   &:disabled {
     opacity: .2;
     cursor: not-allowed;
+  }
+  
+  &:not(:disabled):hover {
+    background-color: ${props => props.theme['base-hover']};;
+    color: ${props => props.theme['purple-dark']};
+  }
+
+  &:first-of-type {
+    padding-inline-start: .5rem;
+    border-radius:
+      ${props => props.theme['border-radius-md']}
+      0
+      0
+      ${props => props.theme['border-radius-md']};
+  }
+
+  &:last-of-type {
+    padding-inline-end: .5rem;
+    border-radius:
+      0
+      ${props => props.theme['border-radius-md']}
+      ${props => props.theme['border-radius-md']}
+      0;
   }
 `

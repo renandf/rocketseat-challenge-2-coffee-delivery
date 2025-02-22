@@ -6,6 +6,7 @@ export function Home() {
     <>
       <Hero />
       <CounterInput />
+      <CounterInput />
     </>
   )
 }
