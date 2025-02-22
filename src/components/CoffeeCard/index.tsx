@@ -41,6 +41,8 @@ export function CoffeeCard({
     // TODO: sum total and send to context
   }
 
+  const styledPrice = (price / 100).toLocaleString('pt-BR', {minimumFractionDigits: 2})
+
   return (
     <CardContainer>
       <img src={image} alt={imageAlt} />
@@ -55,7 +57,7 @@ export function CoffeeCard({
       <p>{description}</p>
 
       <FormContainer onSubmit={handleSubmit}>
-        <span>{price}</span>
+        <span>{styledPrice}</span>
         <CounterInput
           count={coffeeCount}
           updateCoffeeCount={updateCoffeeCount}
