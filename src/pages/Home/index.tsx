@@ -15,6 +15,7 @@ export function Home() {
           return (
             <CoffeeCard
               key={coffee.id}
+              id={coffee.id}
               image={coffee.image}
               imageAlt={coffee.imageAlt}
               tags={coffee.tags}

@@ -1,6 +1,7 @@
 import { ShoppingCart } from 'phosphor-react'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import imgPlaceholder from '../../assets/expresso.png'
+import { CartContext } from '../../Contexts/CartContext.tsx'
 import { CounterInput } from '../CounterInput'
 import { Tag } from '../Tag'
 import {
@@ -12,6 +13,7 @@ import {
 } from './styles'
 
 interface CardProps {
+  id?: string;
   image?: string;
   imageAlt?: string;
   tags?: string[];
@@ -21,13 +23,16 @@ interface CardProps {
 }
 
 export function CoffeeCard({
+  id = 'expresso',
   image = imgPlaceholder,
   imageAlt = '',
-  tags = ['tradicional', 'teste'],
+  tags = ['tradicional'],
   title = 'Expresso Tradicional',
   description = 'O tradicional café feito com água quente e grãos moídos',
-  price = 500
+  price = 800
 }: CardProps) {
+
+  const { addCoffee } = useContext(CartContext)
 
   const [ coffeeCount, setCoffeeCount ] = useState(1)
 
@@ -37,8 +42,13 @@ export function CoffeeCard({
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
+    const coffeeToAdd = {
+      id,
+      price,
+      quantity: coffeeCount
+    }
 
-    // TODO: sum total and send to context
+    addCoffee(coffeeToAdd)
   }
 
   const styledPrice = (price / 100).toLocaleString('pt-BR', {minimumFractionDigits: 2})
