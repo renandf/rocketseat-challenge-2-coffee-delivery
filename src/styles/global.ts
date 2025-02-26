@@ -24,15 +24,25 @@ export const GlobalStyle = createGlobalStyle`
     font-size: 1rem;
   }
 
-  h1 {
+  h1, h2 {
     font-family: 'Baloo 2', 'Roboto', sans-serif;
-    font-size: 3rem;
     color: ${props => props.theme['base-title']};
     line-height: 130%;
     
     @media (max-width: 768px) {
-      font-size: 2.5rem;
       line-height: 110%;
     }
+  }
+  
+  h1 {
+    font-size: 3rem;
+    
+    @media (max-width: 768px) {
+      font-size: 2.5rem;
+    }
+  }
+  
+  h2 {
+    font-size: 1.125rem;
   }
 `
