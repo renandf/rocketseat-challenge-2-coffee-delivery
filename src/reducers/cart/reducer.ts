@@ -2,6 +2,9 @@ import { ActionTypes } from './actions';
 
 export interface Coffee {
   id: string
+  image: string;
+  imageAlt: string;
+  title: string;
   price: number
   quantity: number
 }
@@ -22,7 +25,7 @@ type CartActions = {
     coffees: Coffee[]
   }
 }
-// [...state.coffees, action.payload!.coffee]
+
 export function cartReducer(state: CartState, action: CartActions) {
   switch(action.type) {
     case ActionTypes.ADD_COFFEE:
@@ -44,7 +47,16 @@ export function cartReducer(state: CartState, action: CartActions) {
       return {}
 
     case ActionTypes.REMOVE_COFFEE:
-      return {}
+      return {
+        ...state,
+        coffees: [...action.payload!.coffees],
+        totalItems: action.payload!.coffees.reduce(
+          (acc, obj) => acc + obj.quantity, 0
+        ),
+        totalPrice: action.payload!.coffees.reduce(
+          (acc, obj) => acc + obj.price * obj.quantity, 0
+        ),
+      }
 
     default:
       return state

@@ -28,8 +28,11 @@ export function decreaseCoffeeAction() {
   }
 }
 
-export function removeCoffeeAction() {
+export function removeCoffeeAction(coffees: Coffee[]) {
   return {
-    type: ActionTypes.DECREASE_COFFEE
+    type: ActionTypes.REMOVE_COFFEE,
+    payload: {
+      coffees
+    }
   }
 }

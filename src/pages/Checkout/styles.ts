@@ -21,7 +21,7 @@ export const AsideContainer = styled.aside`
 
 const Base = styled.div`
   padding: 2.5rem;
-  background-color: ${props => props.theme['base-card']};
+  background-color: ${props => props.theme.white};
   border-radius: ${props => props.theme['border-radius-md']};
 `
 
@@ -32,10 +32,28 @@ export const AddressContainer = styled(Base)`
 export const PaymentContainer = styled(Base)``
 
 export const CartContainer = styled(Base)`
-  
   border-radius:
     ${props => props.theme['border-radius-md']}
     ${props => props.theme['border-radius-lg']}
     ${props => props.theme['border-radius-md']}
     ${props => props.theme['border-radius-lg']};
+`
+
+const CartPriceBase = styled.div`
+  display: flex;
+  gap: 1rem;
+  padding-block: .375rem;
+
+  :first-child {
+    flex-grow: 1;
+  }
+`
+
+export const CartPriceItem = styled(CartPriceBase)`
+`
+
+export const CartPriceTotal = styled(CartPriceBase)`
+  padding-block-end: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
 `

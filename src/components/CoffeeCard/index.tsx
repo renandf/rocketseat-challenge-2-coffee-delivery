@@ -44,6 +44,9 @@ export function CoffeeCard({
     e.preventDefault()
     const coffeeToAdd = {
       id,
+      image,
+      imageAlt,
+      title,
       price,
       quantity: coffeeCount
     }

@@ -5,6 +5,7 @@ import { ButtonContainer, CounterContainer, InputContainer } from './styles';
 interface CounterInputProps {
   count: number;
   updateCoffeeCount?: (counter: number) => void;
+  updateCoffeeInCart?: (counter: number) => void;
 }
 
 export function CounterInput({ count = 1, updateCoffeeCount }: CounterInputProps) {

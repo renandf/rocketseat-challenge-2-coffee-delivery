@@ -12,18 +12,14 @@ import {
 } from '../reducers/cart/actions'
 import { cartReducer, Coffee } from '../reducers/cart/reducer'
 
-// interface AddCoffeeData {
-//   coffee: Coffee
-// }
-
 interface CartContextType {
   coffees: Coffee[]
   totalItems: number
   totalPrice: number
-  addCoffee: (data: Coffee) => void
+  addCoffee: (obj: Coffee) => void
   increaseCoffee: () => void
   decreaseCoffee: () => void
-  removeCoffee: () => void
+  removeCoffee: (id: string) => void
 }
 
 export const CartContext = createContext({} as CartContextType)
@@ -95,22 +91,27 @@ export function CartContextProvider({
   // -----------------------------
   // Increase coffee in cart
   // -----------------------------
-  function increaseCoffee() {
+  function increaseCoffee(id: string) {
     dispatch(increaseCoffeeAction())
   }
 
   // -----------------------------
   // Decrease coffee in cart
   // -----------------------------
-  function decreaseCoffee() {
+  function decreaseCoffee(id: string) {
+    const coffeesInCart = []
     dispatch(decreaseCoffeeAction())
   }
 
   // -----------------------------
   // Remove coffee from cart
   // -----------------------------
-  function removeCoffee() {
-    dispatch(removeCoffeeAction())
+  function removeCoffee(coffeeId: string) {
+    function removeFromArray(arr: Coffee[], id: string) {
+      return arr.filter(obj => obj.id !== id)
+    }
+    const coffeesInCart = removeFromArray(cartState.coffees, coffeeId)
+    dispatch(removeCoffeeAction(coffeesInCart))
   }
 
   return (

@@ -1,9 +1,14 @@
-import { useContext } from "react"
-import { CartContext } from "../../Contexts/CartContext"
-import { AddressContainer, AsideContainer, CartContainer, MainContainer, PaymentContainer, WrappingContainer } from "./styles"
+import { useContext } from 'react'
+import { CoffeeCardCart } from '../../components/CoffeeCardCart'
+import { CartContext } from '../../Contexts/CartContext'
+import { styledPrice } from '../../utils'
+import { AddressContainer, AsideContainer, CartContainer, CartPriceItem, CartPriceTotal, MainContainer, PaymentContainer, WrappingContainer } from "./styles"
 
 export function Checkout() {
-  const { coffees } = useContext(CartContext)
+  const { coffees, totalPrice } = useContext(CartContext)
+  const delivery = 350
+  const totalWithDelivery = totalPrice + delivery
+
 
   return (
     <>
@@ -20,9 +25,30 @@ export function Checkout() {
           <CartContainer>
             {coffees.map(coffee => {
               return (
-                <div>{coffee.id} x{coffee.quantity}</div>
+                <CoffeeCardCart
+                  key={coffee.id}
+                  id={coffee.id}
+                  image={coffee.image}
+                  imageAlt={coffee.imageAlt}
+                  title={coffee.title}
+                  price={coffee.price}
+                  quantity={coffee.quantity}
+                />
               )
             })}
+
+            <CartPriceItem>
+              <p>Total de itens</p>
+              <span>{styledPrice(totalPrice)}</span>
+            </CartPriceItem>
+            <CartPriceItem>
+              <p>Entrega</p>
+              <span>{styledPrice(delivery)}</span>
+            </CartPriceItem>
+            <CartPriceTotal>
+              <p>Total</p>
+              <span>{styledPrice(totalWithDelivery)}</span>
+            </CartPriceTotal>
           </CartContainer>
         </AsideContainer>
       </WrappingContainer>
