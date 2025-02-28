@@ -28,6 +28,7 @@ export function CoffeeCardCart({
   function removeCoffeeFromCart(id: string) {
     removeCoffee(id)
   }
+
   return (
     <CoffeeCardCartContainer id={id}>
       <img src={image} alt={imageAlt} />
@@ -39,7 +40,7 @@ export function CoffeeCardCart({
         <ActionsContainer>
           <CounterInput
             count={quantity}
-            // updateCoffeeInCart={updateCoffeeInCart}
+            cartCoffeeId={id}
           />
           <RemoveButtonContainer
             onClick={() => removeCoffeeFromCart(id)}

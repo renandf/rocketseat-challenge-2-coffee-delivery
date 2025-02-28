@@ -16,11 +16,7 @@ interface CartState {
 }
 
 type CartActions = {
-  type:
-    | ActionTypes.ADD_COFFEE
-    | ActionTypes.INCREASE_COFFEE
-    | ActionTypes.DECREASE_COFFEE
-    | ActionTypes.REMOVE_COFFEE
+  type: ActionTypes.UPDATE_CART
   payload?: {
     coffees: Coffee[]
   }
@@ -28,25 +24,7 @@ type CartActions = {
 
 export function cartReducer(state: CartState, action: CartActions) {
   switch(action.type) {
-    case ActionTypes.ADD_COFFEE:
-      return {
-        ...state,
-        coffees: [...action.payload!.coffees],
-        totalItems: action.payload!.coffees.reduce(
-          (acc, obj) => acc + obj.quantity, 0
-        ),
-        totalPrice: action.payload!.coffees.reduce(
-          (acc, obj) => acc + obj.price * obj.quantity, 0
-        ),
-      }
-      
-    case ActionTypes.INCREASE_COFFEE:
-      return {}
-      
-    case ActionTypes.DECREASE_COFFEE:
-      return {}
-
-    case ActionTypes.REMOVE_COFFEE:
+    case ActionTypes.UPDATE_CART:
       return {
         ...state,
         coffees: [...action.payload!.coffees],

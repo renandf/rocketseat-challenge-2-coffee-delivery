@@ -4,12 +4,7 @@ import {
   useEffect,
   useReducer,
 } from 'react'
-import {
-  addCoffeeAction,
-  decreaseCoffeeAction,
-  increaseCoffeeAction,
-  removeCoffeeAction
-} from '../reducers/cart/actions'
+import { updateCartAction } from '../reducers/cart/actions'
 import { cartReducer, Coffee } from '../reducers/cart/reducer'
 
 interface CartContextType {
@@ -17,8 +12,8 @@ interface CartContextType {
   totalItems: number
   totalPrice: number
   addCoffee: (obj: Coffee) => void
-  increaseCoffee: () => void
-  decreaseCoffee: () => void
+  increaseCoffee: (id: string) => void
+  decreaseCoffee: (id: string) => void
   removeCoffee: (id: string) => void
 }
 
@@ -85,22 +80,43 @@ export function CartContextProvider({
       })
     }
 
-    dispatch(addCoffeeAction(coffeesInCart))
+    dispatch(updateCartAction(coffeesInCart))
   }
 
   // -----------------------------
   // Increase coffee in cart
   // -----------------------------
   function increaseCoffee(id: string) {
-    dispatch(increaseCoffeeAction())
+    const coffeeInCart = coffees.find(coffee => coffee.id === id)
+    const newQuantity = coffeeInCart!.quantity + 1
+    
+    const coffeesInCart = coffees.map(coffee => {
+      if (coffee.id === id) {
+        return {...coffee, quantity: newQuantity}
+      } else {
+        return coffee
+      }
+    })
+
+    dispatch(updateCartAction(coffeesInCart))
   }
 
   // -----------------------------
   // Decrease coffee in cart
   // -----------------------------
   function decreaseCoffee(id: string) {
-    const coffeesInCart = []
-    dispatch(decreaseCoffeeAction())
+    const coffeeInCart = coffees.find(coffee => coffee.id === id)
+    const newQuantity = coffeeInCart!.quantity - 1
+
+    const coffeesInCart = coffees.map(coffee => {
+      if (coffee.id === id) {
+        return {...coffee, quantity: newQuantity}
+      } else {
+        return coffee
+      }
+    })
+
+    dispatch(updateCartAction(coffeesInCart))
   }
 
   // -----------------------------
@@ -111,7 +127,7 @@ export function CartContextProvider({
       return arr.filter(obj => obj.id !== id)
     }
     const coffeesInCart = removeFromArray(cartState.coffees, coffeeId)
-    dispatch(removeCoffeeAction(coffeesInCart))
+    dispatch(updateCartAction(coffeesInCart))
   }
 
   return (

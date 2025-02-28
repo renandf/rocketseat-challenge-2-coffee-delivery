@@ -1,19 +1,22 @@
 import { Minus, Plus } from 'phosphor-react';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { CartContext } from '../../Contexts/CartContext';
 import { ButtonContainer, CounterContainer, InputContainer } from './styles';
 
 interface CounterInputProps {
   count: number;
   updateCoffeeCount?: (counter: number) => void;
-  updateCoffeeInCart?: (counter: number) => void;
+  cartCoffeeId?: string | undefined;
 }
 
-export function CounterInput({ count, updateCoffeeCount }: CounterInputProps) {
+export function CounterInput({ count, updateCoffeeCount, cartCoffeeId }: CounterInputProps) {
+  const { increaseCoffee, decreaseCoffee } = useContext(CartContext)
+
   const [ counter, setCounter ] = useState(count)
   const [ isMin, setIsMin ] = useState(count <= 1 ? true : false)
   const [ isMax, setIsMax ] = useState(count >= 99 ? true : false)
   
-  function deacreaseNumber(e: React.FormEvent) {
+  function deacreaseNumber(e: React.MouseEvent<HTMLButtonElement>, coffeeId?: string) {
     e.preventDefault()
     const updatedCounter = counter - 1
 
@@ -32,9 +35,13 @@ export function CounterInput({ count, updateCoffeeCount }: CounterInputProps) {
     if (updateCoffeeCount) {
       updateCoffeeCount(updatedCounter)
     }
+
+    if (coffeeId) {
+      decreaseCoffee(coffeeId)
+    }
   }
   
-  function increaseNumber(e: React.FormEvent) {
+  function increaseNumber(e: React.MouseEvent<HTMLButtonElement>, coffeeId?: string) {
     e.preventDefault()
     const updatedCounter = counter + 1
 
@@ -53,13 +60,17 @@ export function CounterInput({ count, updateCoffeeCount }: CounterInputProps) {
     if (updateCoffeeCount) {
       updateCoffeeCount(updatedCounter)
     }
+
+    if (coffeeId) {
+      increaseCoffee(coffeeId)
+    }
   }
 
   return (
     <CounterContainer>
       <ButtonContainer
         disabled={isMin}
-        onClick={deacreaseNumber}
+        onClick={(e) => deacreaseNumber(e, cartCoffeeId)}
       >
         <Minus size={14} />
       </ButtonContainer>
@@ -75,7 +86,7 @@ export function CounterInput({ count, updateCoffeeCount }: CounterInputProps) {
       
       <ButtonContainer
         disabled={isMax}
-        onClick={increaseNumber}
+        onClick={(e) => increaseNumber(e, cartCoffeeId)}
       >
         <Plus size={14} />
       </ButtonContainer>

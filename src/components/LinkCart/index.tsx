@@ -7,10 +7,6 @@ import { LinkContainer } from './styles'
 export function LinkCart() {
   const { totalItems } = useContext(CartContext)
 
-  // function handleClick(e: React.MouseEvent<HTMLAnchorElement>) {
-  //   if (totalItems === 0) e.preventDefault()
-  // }
-
   return (
     <Link to="/checkout">
       <LinkContainer disabled={!totalItems}>
