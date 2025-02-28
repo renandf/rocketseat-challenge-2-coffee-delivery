@@ -39,21 +39,26 @@ export const CartContainer = styled(Base)`
     ${props => props.theme['border-radius-lg']};
 `
 
+
+export const CartPriceGroup = styled.div`
+  padding-block-start: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+`
+
 const CartPriceBase = styled.div`
   display: flex;
   gap: 1rem;
-  padding-block: .375rem;
 
   :first-child {
     flex-grow: 1;
   }
 `
-
 export const CartPriceItem = styled(CartPriceBase)`
 `
 
 export const CartPriceTotal = styled(CartPriceBase)`
-  padding-block-end: 0;
   font-size: 1.25rem;
   font-weight: 700;
 `

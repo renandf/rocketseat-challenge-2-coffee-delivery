@@ -2,7 +2,7 @@ import { useContext } from 'react'
 import { CoffeeCardCart } from '../../components/CoffeeCardCart'
 import { CartContext } from '../../Contexts/CartContext'
 import { styledPrice } from '../../utils'
-import { AddressContainer, AsideContainer, CartContainer, CartPriceItem, CartPriceTotal, MainContainer, PaymentContainer, WrappingContainer } from "./styles"
+import { AddressContainer, AsideContainer, CartContainer, CartPriceGroup, CartPriceItem, CartPriceTotal, MainContainer, PaymentContainer, WrappingContainer } from "./styles"
 
 export function Checkout() {
   const { coffees, totalPrice } = useContext(CartContext)
@@ -37,18 +37,20 @@ export function Checkout() {
               )
             })}
 
-            <CartPriceItem>
-              <p>Total de itens</p>
-              <span>{styledPrice(totalPrice)}</span>
-            </CartPriceItem>
-            <CartPriceItem>
-              <p>Entrega</p>
-              <span>{styledPrice(delivery)}</span>
-            </CartPriceItem>
-            <CartPriceTotal>
-              <p>Total</p>
-              <span>{styledPrice(totalWithDelivery)}</span>
-            </CartPriceTotal>
+            <CartPriceGroup>
+              <CartPriceItem>
+                <p>Total de itens</p>
+                <span>{styledPrice(totalPrice)}</span>
+              </CartPriceItem>
+              <CartPriceItem>
+                <p>Entrega</p>
+                <span>{styledPrice(delivery)}</span>
+              </CartPriceItem>
+              <CartPriceTotal>
+                <p>Total</p>
+                <span>{styledPrice(totalWithDelivery)}</span>
+              </CartPriceTotal>
+            </CartPriceGroup>
           </CartContainer>
         </AsideContainer>
       </WrappingContainer>

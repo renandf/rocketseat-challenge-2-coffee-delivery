@@ -1,10 +1,10 @@
-import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 
-export const LinkContainer = styled(NavLink)`
+export const LinkContainer = styled.button`
   position: relative;
   padding: .5rem;
   line-height: 0;
+  border: 0;
   
   background: ${props => props.theme['yellow-light']};
   border-radius: ${props => props.theme['border-radius-md']};
@@ -35,5 +35,16 @@ export const LinkContainer = styled(NavLink)`
     
     background: ${props => props.theme['yellow-dark']};
     color: ${props => props.theme.white};
+  }
+
+  &:disabled {
+    background: ${props => props.theme['base-card']};
+    color: ${props => props.theme['base-hover']};
+    cursor: not-allowed;
+
+    span {
+      background: ${props => props.theme['base-card']};
+      color: ${props => props.theme['base-label']};
+    }
   }
 `

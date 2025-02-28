@@ -26,8 +26,6 @@ export function CoffeeCardCart({
   const { removeCoffee } = useContext(CartContext)
 
   function removeCoffeeFromCart(id: string) {
-    console.log(id)
-
     removeCoffee(id)
   }
   return (

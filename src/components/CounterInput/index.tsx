@@ -8,16 +8,16 @@ interface CounterInputProps {
   updateCoffeeInCart?: (counter: number) => void;
 }
 
-export function CounterInput({ count = 1, updateCoffeeCount }: CounterInputProps) {
+export function CounterInput({ count, updateCoffeeCount }: CounterInputProps) {
   const [ counter, setCounter ] = useState(count)
-  const [ isMin, setIsMin ] = useState(true)
-  const [ isMax, setIsMax ] = useState(false)
+  const [ isMin, setIsMin ] = useState(count <= 1 ? true : false)
+  const [ isMax, setIsMax ] = useState(count >= 99 ? true : false)
   
   function deacreaseNumber(e: React.FormEvent) {
     e.preventDefault()
     const updatedCounter = counter - 1
 
-    if (counter > 2 && counter <= 9) {
+    if (counter > 2 && counter <= 99) {
       setCounter(updatedCounter)
       setIsMax(false)
     } else if (counter === 2) {
@@ -38,10 +38,10 @@ export function CounterInput({ count = 1, updateCoffeeCount }: CounterInputProps
     e.preventDefault()
     const updatedCounter = counter + 1
 
-    if (counter >= 1 && counter < 8) {
+    if (counter >= 1 && counter < 98) {
       setCounter(updatedCounter)
       setIsMin(false)
-    } else if (counter === 8) {
+    } else if (counter === 98) {
       setCounter(updatedCounter)
       setIsMax(true)
     } else {
@@ -70,7 +70,7 @@ export function CounterInput({ count = 1, updateCoffeeCount }: CounterInputProps
         value={counter}
         step={1}
         min={1}
-        max={9}
+        max={99}
       />
       
       <ButtonContainer
