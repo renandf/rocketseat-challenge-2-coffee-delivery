@@ -10,7 +10,7 @@ interface CounterInputProps {
 }
 
 export function CounterInput({ count, updateCoffeeCount, cartCoffeeId }: CounterInputProps) {
-  const { increaseCoffee, decreaseCoffee } = useContext(CartContext)
+  const { updateCoffeeInCart } = useContext(CartContext)
 
   const [ counter, setCounter ] = useState(count)
   const [ isMin, setIsMin ] = useState(count <= 1 ? true : false)
@@ -37,7 +37,7 @@ export function CounterInput({ count, updateCoffeeCount, cartCoffeeId }: Counter
     }
 
     if (coffeeId) {
-      decreaseCoffee(coffeeId)
+      updateCoffeeInCart(coffeeId, 'subtract')
     }
   }
   
@@ -62,7 +62,7 @@ export function CounterInput({ count, updateCoffeeCount, cartCoffeeId }: Counter
     }
 
     if (coffeeId) {
-      increaseCoffee(coffeeId)
+      updateCoffeeInCart(coffeeId, 'add')
     }
   }
 

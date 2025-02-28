@@ -12,8 +12,7 @@ interface CartContextType {
   totalItems: number
   totalPrice: number
   addCoffee: (obj: Coffee) => void
-  increaseCoffee: (id: string) => void
-  decreaseCoffee: (id: string) => void
+  updateCoffeeInCart: (id: string, operation: 'add' | 'subtract') => void
   removeCoffee: (id: string) => void
 }
 
@@ -84,30 +83,18 @@ export function CartContextProvider({
   }
 
   // -----------------------------
-  // Increase coffee in cart
+  // Update coffee in cart
   // -----------------------------
-  function increaseCoffee(id: string) {
+  function updateCoffeeInCart(id: string, operation: 'add' | 'subtract') {
     const coffeeInCart = coffees.find(coffee => coffee.id === id)
-    const newQuantity = coffeeInCart!.quantity + 1
+    let newQuantity:number
+
+    if (operation === 'add')  {
+      newQuantity = coffeeInCart!.quantity + 1
+    } else {
+      newQuantity = coffeeInCart!.quantity - 1
+    }
     
-    const coffeesInCart = coffees.map(coffee => {
-      if (coffee.id === id) {
-        return {...coffee, quantity: newQuantity}
-      } else {
-        return coffee
-      }
-    })
-
-    dispatch(updateCartAction(coffeesInCart))
-  }
-
-  // -----------------------------
-  // Decrease coffee in cart
-  // -----------------------------
-  function decreaseCoffee(id: string) {
-    const coffeeInCart = coffees.find(coffee => coffee.id === id)
-    const newQuantity = coffeeInCart!.quantity - 1
-
     const coffeesInCart = coffees.map(coffee => {
       if (coffee.id === id) {
         return {...coffee, quantity: newQuantity}
@@ -136,8 +123,7 @@ export function CartContextProvider({
       totalItems,
       totalPrice,
       addCoffee,
-      increaseCoffee,
-      decreaseCoffee,
+      updateCoffeeInCart,
       removeCoffee,
     }}>
       {children}

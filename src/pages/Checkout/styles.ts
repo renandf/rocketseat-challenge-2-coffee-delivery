@@ -62,3 +62,29 @@ export const CartPriceTotal = styled(CartPriceBase)`
   font-size: 1.25rem;
   font-weight: 700;
 `
+
+export const CartButton = styled.button`
+  margin-block-start: 1.5rem;
+  width: 100%;
+  text-align: center;
+  background-color: ${props => props.theme['yellow']};
+  color: ${props => props.theme.white};
+  border-radius: ${props => props.theme['border-radius-md']};
+  padding: .75rem .5rem;
+  border: 0;
+  font-size: .875rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color .2s, color .2s;
+
+  &:hover {
+    background-color: ${props => props.theme['yellow-dark']};
+  }
+
+  &:disabled {
+    background-color: ${props => props.theme['base-card']};
+    color: ${props => props.theme['base-hover']};
+    cursor: not-allowed;
+  }
+`
